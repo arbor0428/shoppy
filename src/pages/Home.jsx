@@ -1,13 +1,12 @@
 import React from 'react';
-import Products from '../components/Products';
 import Banner from '../components/Banner';
+import Popular from '../components/Popular';
 
 export default function Home() {
-    return (
-        <>
-            <Banner />
-            <Products />
-        </>
-    );
+  return (
+    <>
+      <Banner />
+      <Popular />
+    </>
+  );
 }
-

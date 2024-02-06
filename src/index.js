@@ -11,6 +11,8 @@ import NewProduct from './pages/NewProduct';
 import ProductDetail from './pages/ProductDetail';
 import MyCart from './pages/MyCart';
 import ProtectedRoute from './pages/ProtectedRoute';
+import MenProducts from './pages/MenProducts';
+import WomenProducts from './pages/WomenProducts';
 
 const router= createBrowserRouter([
   {
@@ -22,6 +24,14 @@ const router= createBrowserRouter([
       {
         path: '/products', 
         element: <AllProducts />
+      },
+      {
+        path: '/products/men', 
+        element: <MenProducts />
+      },
+      {
+        path: '/products/women', 
+        element: <WomenProducts />
       },
       {
         path: '/products/new' , 

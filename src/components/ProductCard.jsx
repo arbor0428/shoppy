@@ -2,23 +2,33 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function ProductCard({
-    product,
-    product: {id, image, title, category, price},
+  product,
+  product: { id, image, title, price },
 }) {
-    const navigate = useNavigate();
-    return (
-        <li onClick={() => {
-            navigate(`/products/${id}`, {state: { product }})}
-        }
-        className='rounded-lg shadow-md overflow-hidden cursor-pointer transition-all hover:scale-105'>
-            <img className='w-full' src={image} alt={title} />
-            <div className='mt-2 px-2 text-lg flex justify-between items-center'>
-                <h3 className='truncate'>{title}</h3>
-                <p>{`₩${price}`}</p>
-            </div>
-            <p className='mb-2 px-2 text-gray-600'>{category}</p>
-        </li>
-    );
-    
-}
+  const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate(`/products/${id}`, { state: { product } });
+    // 페이지 이동 후 페이지 상단으로 스크롤
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // 이미지가 배열인 경우 첫 번째 이미지만 사용
+  const imageUrl = Array.isArray(image) ? image[0] : image;
+
+
+  return (
+    <li
+      onClick={handleClick}
+      className='cursor-pointer'
+    >
+      <div className='w-full overflow-hidden'>
+        <img className='w-full transition-all hover:scale-105' src={imageUrl} alt={title} />
+      </div>
+      <div className='mt-2 px-2 text-lg'>
+        <h3 className='font-bold text-lg truncate'>{title}</h3>
+        <p>{`₩${price}`}</p>
+      </div>
+    </li>
+  );
+}
