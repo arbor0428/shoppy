@@ -5,53 +5,54 @@ import useProducts from '../hooks/useProducts';
 
 export default function NewProduct() {
   const [product, setProduct] = useState({});
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState([]); // 업로드할 파일 배열
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState();
   const { addProduct } = useProducts();
 
   const handleChange = (e) => {
-    const { name, value, files: selectedFiles } = e.target;
-    if (name === 'file') {
-      setFiles(Array.from(selectedFiles));
-      return;
-    }
-    setProduct((product) => ({ ...product, [name]: value }));
+    const selectedFiles = Array.from(e.target.files);
+    setFiles(selectedFiles);
+    // 선택한 파일들에 대한 미리보기 업데이트
+    setProduct({
+      ...product,
+      images: selectedFiles.map((file) => URL.createObjectURL(file)),
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsUploading(true);
-
     try {
-      const imageUrls = await Promise.all(files.map(uploadImage));
-      await addProduct.mutate({
-        product,
-        images: imageUrls
-      });
+      const uploadedImageUrls = await Promise.all(files.map(uploadImage)); // 선택한 모든 파일 업로드
+      const productWithImages = {
+        ...product,
+        images: uploadedImageUrls.slice(0, 4), // 최대 4개의 이미지 URL만 저장
+      };
+      await addProduct.mutate(productWithImages); // 제품 정보와 이미지 URL 배열 전달하여 제품 추가
       setSuccess('성공적으로 제품이 추가되었습니다.');
       setTimeout(() => {
         setSuccess(null);
       }, 4000);
     } catch (error) {
-      console.error('Error adding product:', error);
+      console.error('제품 추가 중 오류:', error);
     } finally {
       setIsUploading(false);
-      // 등록 후 파일 상태 초기화
-      setFiles([]);
+      setFiles([]); // 파일 선택 상태 초기화
     }
   };
+
 
   return (
     <section className='w-full text-center'>
       <h2 className='text-2xl font-bold my-4'>새로운 제품 등록</h2>
       {success && <p className='my-2'>✅ {success}</p>}
       <div className="flex flex-wrap justify-center mb-4">
-        {files.map((file, index) => (
+        {product.images.map((image, index) => (
           <img
             key={index}
             className='w-40 h-40 mx-2 my-2'
-            src={URL.createObjectURL(file)}
+            src={image}
             alt={`Uploaded image ${index + 1}`}
           />
         ))}

@@ -12,13 +12,13 @@ export default function Footer() {
 
     return (
         <footer className="cursor-default bg-black text-white w-full pb-2 mt-20">
-            <section className="flex lg:justify-between m-auto justify-center lg:w-[1080px] xl:w-[1380px] px-28 pt-10">
+            <section className="flex items-center flex-col lg:flex-row lg:justify-between m-auto justify-center 2xl:w-[1280px] xl:w-[1024px] w-11/12 pt-10">
                 <Link to='/' onClick={scrollToTop} className='flex items-center text-6xl'>
                     <FaRunning />
                     <h1 className='ml-4'>NICE</h1>
                 </Link>
-                <ul className="hidden lg:flex font-normal lg:gap-32 w-fit text-sm">
-                    <li className="flex flex-col gap-2">
+                <ul className="flex font-normal gap-32 w-fit text-sm">
+                    <li className="hidden lg:flex lg:flex-col lg:gap-2">
                         <div className="font-bold text-xl mb-4">고객센터</div>
                         <div>주문배송조회</div>
                         <div>반품 정책</div>
@@ -26,7 +26,7 @@ export default function Footer() {
                         <div>공지사항</div>
                         <div>문의하기</div>
                     </li>
-                    <li className="flex flex-col gap-2">
+                    <li className="hidden lg:flex lg:flex-col lg:gap-2">
                         <div className="font-bold text-xl mb-4">회사소개</div>
                         <div>About Nike</div>
                         <div>소식</div>
@@ -34,7 +34,7 @@ export default function Footer() {
                         <div>투자자</div>
                         <div>지속가능성</div>
                     </li>
-                    <li className="flex flex-col gap-2">
+                    <li className="flex flex-row justify-center mt-10 lg:mt-0 lg:flex-col gap-2 lg:justify-normal">
                         <div className="font-bold text-xl mb-2">멤버가입</div>
                         <div className="font-bold text-xl mb-2">매장찾기</div>
                         <div className="font-bold text-xl mb-2">나이키 저널</div>

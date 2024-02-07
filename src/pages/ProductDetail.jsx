@@ -28,10 +28,12 @@ export default function ProductDetail() {
 
   return (
     <>
-      <section className='p-4 mx-auto max-w-sm lg:max-w-7xl'>
-        <div className='flex flex-col md:flex-row'>
-          <img className='w-full px-4 basis-7/12' src={image} alt={title} />
-          <div className='w-full basis-5/12 flex flex-col p-4'>
+      <section className='p-4 mx-auto w-11/12 2xl:w-[1280px] xl:w-[1024px]'>
+        <div className='flex flex-col gap-2 lg:flex-row md:gap-10'>
+          <div className='md:basis-7/12'>
+            <img className='w-full px-4' src={image} alt={title} />
+          </div>
+          <div className='w-full md:basis-5/12 flex flex-col p-4'>
             <p>상품 / {category}</p>
             <h2 className='text-3xl font-bold py-2'>{title}</h2>
             <p className='text-xl font-bold pt-2'>

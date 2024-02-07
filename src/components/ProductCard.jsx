@@ -22,8 +22,8 @@ export default function ProductCard({
       onClick={handleClick}
       className='cursor-pointer'
     >
-      <div className='w-full overflow-hidden'>
-        <img className='w-full transition-all hover:scale-105' src={imageUrl} alt={title} />
+      <div className='w-full overflow-hidden max-h-[450px]'>
+        <img className='w-full h-full transition-all hover:scale-105' src={imageUrl} alt={title} />
       </div>
       <div className='mt-2 px-2 text-lg'>
         <h3 className='font-bold text-lg truncate'>{title}</h3>

@@ -48,23 +48,15 @@ async function adminUser(user) {
         });
 }
 
-export async function addNewProduct(product, images) {
-  const id = uuid(); // 제품 ID 생성
-    const productData = {
+export async function addNewProduct(product, uploadedImageUrls) {
+    const id = uuid();
+    return set(ref(database, `products/${id}`), {
         ...product,
         id,
         price: parseInt(product.price),
-        images,
+        images: uploadedImageUrls.slice(0, 4),
         options: product.options.split(','),
-    };
-
-    try {
-        await set(ref(database, `products/${id}`), productData); // 제품 데이터 Firebase에 저장
-        return { success: true, id }; // 성공적으로 등록되었음을 알리고 등록된 제품의 ID를 반환
-    } catch (error) {
-        console.error('Error adding product:', error);
-        return { success: false, error }; // 등록 중 오류가 발생한 경우 오류 메시지 반환
-    }
+    });
 }
 
 export async function getProducts() {
