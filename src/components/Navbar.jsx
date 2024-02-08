@@ -109,9 +109,9 @@ export default function Navbar() {
                     >Women
                   </Link>
                 </nav>
-                <div className='mt-20 flex items-center justify-center gap-4 border-y border-slate-200 py-4'>
+                <div className={`mt-20 flex items-center justify-center gap-4 py-4 ${user ? 'border-y border-slate-200' :''}`}>
                   {!user && 
-                    <button className="block bg-black text-sm py-2 px-20 text-white rounded-full border hover:border-transparent" onClick={login}>Sign in</button>
+                    <button className="text-lg py-3 px-20 bg-black text-white rounded-full" onClick={login}>Sign in</button>
                   }
                   {user && (
                     <div className='flex items-center'>
@@ -149,7 +149,7 @@ export default function Navbar() {
             </nav>
             <div className='flex items-center gap-4'>
             {!user && 
-              <button className="border-black text-sm p-2 px-4 hover:bg-black hover:text-white rounded-full border hover:border-transparent" onClick={login}>Sign in</button>
+              <button className="text-lg p-2 px-4 hover:bg-black hover:text-white rounded-full border hover:border-transparent" onClick={login}>Sign in</button>
             }
             {user && user.isAdmin && !isMobile && (
               <Link to='/products/new' className='transition ease-in-out delay-100 hover:text-lime-600 text-xl'>
