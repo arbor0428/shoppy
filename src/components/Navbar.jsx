@@ -149,7 +149,7 @@ export default function Navbar() {
             </nav>
             <div className='flex items-center gap-4'>
             {!user && 
-              <button className="text-lg p-2 px-4 hover:bg-black hover:text-white rounded-full border hover:border-transparent" onClick={login}>Sign in</button>
+              <button className="p-2 px-4 hover:bg-black hover:text-white rounded-full border hover:border-transparent" onClick={login}>Sign in</button>
             }
             {user && user.isAdmin && !isMobile && (
               <Link to='/products/new' className='transition ease-in-out delay-100 hover:text-lime-600 text-xl'>
