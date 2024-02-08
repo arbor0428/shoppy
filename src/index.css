@@ -32,7 +32,8 @@ h1 {
   font-weight: 700;
 }
 
-h2 {
+h2,
+h3 {
   font-family: 'Roboto', sans-serif;
 }
 

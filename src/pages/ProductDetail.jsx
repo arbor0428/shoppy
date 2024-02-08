@@ -15,7 +15,7 @@ export default function ProductDetail() {
   } = useLocation();
   const [success, setSuccess] = useState();
   const [selected, setSelected] = useState(options && options[0]);
-  const handleSelect = (e) => setSelected(e.target.value);
+  const handleSelect = (option) => setSelected(option); // 이제는 버튼을 클릭할 때 해당 옵션을 선택하도록 업데이트
   const handleClick = (e) => {
     const product = { id, image, title, price, option: selected, quantity: 1 };
     addOrUpdateItem.mutate(product, {
@@ -26,35 +26,40 @@ export default function ProductDetail() {
     });
   };
 
+  const formattedPrice = price.toLocaleString(); // 가격을 천 단위 콤마로 포맷팅
+
   return (
     <>
-      <section className='p-4 mx-auto w-11/12 2xl:w-[1280px] xl:w-[1024px]'>
-        <div className='flex flex-col gap-2 lg:flex-row md:gap-10'>
-          <div className='md:basis-7/12'>
-            <img className='w-full px-4' src={image} alt={title} />
+      <section className='py-12 mx-auto w-11/12 2xl:w-[1280px] xl:w-[1024px]'>
+        <div className='flex flex-col gap-6 lg:flex-row'>
+          <div className='basis-full md:basis-7/12'>
+            <img className='w-full md:px-4' src={image} alt={title} />
           </div>
-          <div className='w-full md:basis-5/12 flex flex-col p-4'>
+          <div className='w-full basis-full md:basis-5/12 flex flex-col  md:px-4'>
             <p>상품 / {category}</p>
             <h2 className='text-3xl font-bold py-2'>{title}</h2>
             <p className='text-xl font-bold pt-2'>
-              {price}원
+              {formattedPrice}원
             </p>
             <p className='my-8 text-lg'>{description}</p>
             <div className='mb-6 flex flex-col'>
-              <label className='text-zinc-400 font-bold' htmlFor='select'>
-                OPTIONS
-              </label>
-              <select
-                id='select'
-                className='p-2 my-4 flex-1 border border-zinc-300 focus:outline-zinc-400'
-                onChange={handleSelect}
-                value={selected}
-              >
+              <p className='mb-4 text-zinc-700 font-bold' htmlFor='select'>
+                사이즈 선택
+              </p>
+              <div className='grid grid-cols-3 md:grid-cols-5 gap-1'>
                 {options &&
-                  options.map((option, index) => (
-                    <option key={index}>{option}</option>
+                    options.map((option, index) => (
+                      <button
+                        key={index}
+                        className={`py-3 rounded-md border border-zinc-300 font-bold focus:outline-zinc-400 ${
+                          selected === option ? 'bg-gray-300' : ''
+                        }`}
+                        onClick={() => handleSelect(option)}
+                      >
+                        {option}
+                      </button>
                   ))}
-              </select>
+              </div>
             </div>
             
               {success && <p className='my-2'>✅{success}</p>}

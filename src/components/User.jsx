@@ -8,7 +8,7 @@ export default function User({ user: { photoURL, displayName } }) {
         src={photoURL}
         alt={displayName}
       />
-      <span className='hidden md:block mx-2 text-sm'>{displayName}님, 안녕하세요.</span>
+      <p className='mx-2 text-sm'>{displayName}<span className='hidden md:inline-block'>님, 안녕하세요.</span></p>
     </div>
   );
 }

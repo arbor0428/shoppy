@@ -13,9 +13,9 @@ export default function Footer() {
     return (
         <footer className="cursor-default bg-black text-white w-full pb-2 mt-20">
             <section className="flex items-center flex-col lg:flex-row lg:justify-between m-auto justify-center 2xl:w-[1280px] xl:w-[1024px] w-11/12 pt-10">
-                <Link to='/' onClick={scrollToTop} className='flex items-center text-6xl'>
+                <Link to='/' onClick={scrollToTop} className='flex items-center text-4xl md:text-6xl'>
                     <FaRunning />
-                    <h1 className='ml-4'>NICE</h1>
+                    <h1 className='ml-2 sm:ml-4'>NICE</h1>
                 </Link>
                 <ul className="flex font-normal gap-32 w-fit text-sm">
                     <li className="hidden lg:flex lg:flex-col lg:gap-2">
@@ -34,10 +34,10 @@ export default function Footer() {
                         <div>투자자</div>
                         <div>지속가능성</div>
                     </li>
-                    <li className="flex flex-row justify-center mt-10 lg:mt-0 lg:flex-col gap-2 lg:justify-normal">
-                        <div className="font-bold text-xl mb-2">멤버가입</div>
-                        <div className="font-bold text-xl mb-2">매장찾기</div>
-                        <div className="font-bold text-xl mb-2">나이키 저널</div>
+                    <li className="flex flex-row justify-center mt-8 lg:mt-0 lg:flex-col gap-2 lg:justify-normal">
+                        <div className="font-bold sm:text-lg md:text-xl mb-2">멤버가입</div>
+                        <div className="font-bold sm:text-lg md:text-xl mb-2">매장찾기</div>
+                        <div className="font-bold sm:text-lg md:text-xl mb-2">나이키 저널</div>
                     </li>
                 </ul>
             </section>
