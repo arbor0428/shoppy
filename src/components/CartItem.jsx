@@ -25,7 +25,6 @@ export default function CartItem({
   // 첫 번째 이미지 선택
   const mainImage = images && images.length > 0 ? images[0] : null;
 
-
   return (
     <li className='flex justify-between my-2 items-center'>
         {mainImage && (

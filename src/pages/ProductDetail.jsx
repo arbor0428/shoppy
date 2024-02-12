@@ -16,6 +16,9 @@ export default function ProductDetail() {
       product: { id, images, title, description, category, price, options },
     },
   } = useLocation();
+
+  console.log(useLocation().state);
+
   const [success, setSuccess] = useState();
   const [selected, setSelected] = useState(options && options[0]);
 
