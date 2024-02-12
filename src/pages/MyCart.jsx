@@ -13,6 +13,8 @@ export default function MyCart() {
     cartQuery: { isLoading, data: products },
   } = useCart();
 
+  console.log(products); 
+
   if (isLoading) return <p>Loading...</p>;
 
   const hasProducts = products && products.length > 0;

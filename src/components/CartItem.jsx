@@ -8,7 +8,7 @@ const ICON_CLASS =
 
 export default function CartItem({
   product,
-  product: { id, image, title, option, quantity, price },
+  product: { id, images, title, option, quantity, price },
 }) {
   const { addOrUpdateItem, removeItem } = useCart();
   const handleMinus = () => {
@@ -21,10 +21,16 @@ export default function CartItem({
   const handleDelete = () => removeItem.mutate(id);
 
   const formattedPrice = price.toLocaleString(); // 가격을 천 단위 콤마로 포맷팅
+  
+  // 첫 번째 이미지 선택
+  const mainImage = images && images.length > 0 ? images[0] : null;
+
 
   return (
     <li className='flex justify-between my-2 items-center'>
-      <img className='w-24 md:w-48 rounded-lg' src={image} alt={title} />
+        {mainImage && (
+          <img className='w-24 md:w-48 rounded-lg' src={mainImage} alt={title} />
+        )}
       <div className='flex-1 flex justify-between ml-4'>
         <div className='basis-3/5'>
           <p className='md:text-lg'>{title}</p>
