@@ -8,7 +8,7 @@ export default function Products() {
     } = useProducts();
 
       // '남성' 카테고리에 해당하는 제품들만 필터링
-    const menProducts = products ? products.filter(product => product.category === '남성') : [];
+    const menProducts = products ? products.filter(product => product.category === '남성신발') : [];
 
 
     return (

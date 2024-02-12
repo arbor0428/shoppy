@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');
 
 body {
@@ -12,6 +13,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   @apply flex flex-col items-center;
+}
+
+*:focus {
+  outline: 0;
+  outline: none;
 }
 
 #root {
@@ -39,4 +45,77 @@ h3 {
 
 p {
   font-family: 'Cantarell', sans-serif;
+}
+
+
+
+.slick-dots {
+  bottom: 14px !important;
+}
+
+.slick-dots li button:before {
+  content: "" !important;
+  border-radius: 50%;
+  background-color: #68a80d;
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.slick-next,
+.slick-prev {
+  border-radius: 50% !important;
+  width: 50px !important;
+  height: 50px !important;
+  z-index: 30 !important;
+}
+
+.slick-next {
+  right: 0px !important;
+}
+
+.slick-prev {
+  left: 0px !important;
+}
+
+.slick-next:before,
+.slick-prev:before {
+  content: "" !important;
+  opacity: 1 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center center !important;
+
+}
+
+.slick-next:before {
+  background-image: url("../public/images/next.png") !important;
+}
+
+.slick-prev:before {
+  background-image: url("../public/images/back.png") !important;
+}
+
+@media (max-width: 768px) {
+
+  .slick-next,
+  .slick-prev {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .slick-next {
+    right: -5px !important;
+  }
+
+  .slick-prev {
+    left: -5px !important;
+  }
+
+  .slick-dots li button:before {
+    width: 12px !important;
+    height: 12px !important;
+  }
 }

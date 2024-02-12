@@ -13,6 +13,9 @@ import MyCart from './pages/MyCart';
 import ProtectedRoute from './pages/ProtectedRoute';
 import MenProducts from './pages/MenProducts';
 import WomenProducts from './pages/WomenProducts';
+import '../node_modules/slick-carousel/slick/slick.css'
+import '../node_modules/slick-carousel/slick/slick-theme.css';
+
 
 const router= createBrowserRouter([
   {

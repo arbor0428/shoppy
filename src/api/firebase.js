@@ -1,19 +1,19 @@
-import { initializeApp } from "firebase/app";
-import {v4 as uuid} from 'uuid';
-import { 
-    getAuth, 
-    signInWithPopup, 
-    GoogleAuthProvider, 
-    signOut, 
-    onAuthStateChanged  
-} from "firebase/auth";
-import { getDatabase, ref, set, get, remove } from "firebase/database";
+import { initializeApp } from 'firebase/app';
+import { v4 as uuid } from 'uuid';
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+  onAuthStateChanged,
+} from 'firebase/auth';
+import { getDatabase, ref, set, get, remove } from 'firebase/database';
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    authDomain: process.env.REACT_APP_FIREBASE_API_AUTH_DOMAIN,
-    databaseURL: process.env.REACT_APP_FIREBASE_API_DB_URL,
-    projectId: process.env.REACT_APP_FIREBASE_API_PROJECT_ID,
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_API_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_API_DB_URL,
+  projectId: process.env.REACT_APP_FIREBASE_API_PROJECT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -22,64 +22,65 @@ const provider = new GoogleAuthProvider();
 const database = getDatabase(app);
 
 export function login() {
-    signInWithPopup(auth, provider).catch(console.error);
+  signInWithPopup(auth, provider).catch(console.error);
 }
 
 export function logout() {
-    signOut(auth).catch(console.error);
+  signOut(auth).catch(console.error);
 }
 
 export function onUserStateChange(callback) {
-    onAuthStateChanged(auth, async (user) => {
-        const updatedUser = user ? await adminUser(user) : null;
-        callback(updatedUser);
-    });
+  onAuthStateChanged(auth, async (user) => {
+    const updatedUser = user ? await adminUser(user) : null;
+    callback(updatedUser);
+  });
 }
 
 async function adminUser(user) {
-    return get(ref(database, 'admins'))
-        .then((snapshot) => {
-            if(snapshot.exists()) {
-                const admins = snapshot.val();
-                const isAdmin = admins.includes(user.uid);
-                return {...user, isAdmin}
-            }
-            return user;
-        });
+  return get(ref(database, 'admins')) //
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const admins = snapshot.val();
+        const isAdmin = admins.includes(user.uid);
+        return { ...user, isAdmin };
+      }
+      return user;
+    });
 }
 
-export async function addNewProduct(product, uploadedImageUrls) {
-    const id = uuid();
-    return set(ref(database, `products/${id}`), {
-        ...product,
-        id,
-        price: parseInt(product.price),
-        images: uploadedImageUrls.slice(0, 4),
-        options: product.options.split(','),
-    });
+export async function addNewProduct(product, images) {
+  const id = uuid();
+  const imagesArray = Array.isArray(images) ? images : [images]; // 이미지를 배열로 변환
+  return set(ref(database, `products/${id}`), {
+    ...product,
+    id,
+    price: parseInt(product.price),
+    images: imagesArray, // 이미지를 배열로 변환한 값을 저장
+    options: product.options.split(','),
+  });
 }
 
 export async function getProducts() {
-    return get(ref(database, 'products')).then((snapshot) => {
-        if (snapshot.exists()) {
-            return Object.values(snapshot.val());
-        }
-        return [];
-    });
+  return get(ref(database, 'products')).then((snapshot) => {
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val());
+    }
+    return [];
+  });
 }
 
 export async function getCart(userId) {
-    return get(ref(database, `carts/${userId}`))//
-    .then(snapshot => {
-        const items = snapshot.val() || {};
-        return Object.values(items);
+  return get(ref(database, `carts/${userId}`)) //
+    .then((snapshot) => {
+      const items = snapshot.val() || {};
+      return Object.values(items);
     });
 }
 
 export async function addOrUpdateToCart(userId, product) {
-    return set(ref(database, `carts/${userId}/${product.id}`), product);
+  return set(ref(database, `carts/${userId}/${product.id}`), product);
 }
 
 export async function removeFromCart(userId, productId) {
-    return remove(ref(database, `carts/${userId}/${productId}`));
+  return remove(ref(database, `carts/${userId}/${productId}`));
 }
